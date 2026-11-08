@@ -93,17 +93,17 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   static const activities = <LearningActivity>[
-    LearningActivity('الحروف', 'أ ب ت', '🔤', Color(0xFFE8E4FF),
+   const LearningActivity('الحروفconst', 'أ ب ت', '🔤', const Color(0xFFE8E4FF),
         ['أ', 'ب', 'ت', 'ث', 'ج', 'ح']),
-    LearningActivity('الأرقام', '1 2 3', '🔢', Color(0xFFFFE9D9),
+   const LearningActivity('الأرقامconst', '1 2 3', '🔢', const Color(0xFFFFE9D9),
         ['١', '٢', '٣', '٤', '٥', '٦']),
-    LearningActivity('الألوان', 'ألوان جميلة', '🎨', Color(0xFFFFE4EE),
+   const LearningActivity('الألوانconst', 'ألوان جميلة', '🎨', const Color(0xFFFFE4EE),
         ['أحمر ❤️', 'أزرق 💙', 'أصفر 💛', 'أخضر 💚']),
-    LearningActivity('الحيوانات', 'أصدقاء صغار', '🐼', Color(0xFFE1F5E9),
+   const LearningActivity('الحيوانات', 'أصدقاء صغار', '🐼', const Color(0xFFE1F5E9),
         ['أسد 🦁', 'قطة 🐱', 'أرنب 🐰', 'فيل 🐘']),
-    LearningActivity('الإنجليزية', 'Hello!', '🌟', Color(0xFFE0F1FF),
+  const  LearningActivity('الإنجليزية', 'Hello!', '🌟', const Color(0xFFE0F1FF),
         ['Apple 🍎', 'Cat 🐱', 'Sun ☀️', 'Book 📘']),
-    LearningActivity('القصص', 'حكايات ممتعة', '📚', Color(0xFFFFF2CC),
+  const  LearningActivity('القصص', 'حكايات ممتعة', '📚', const Color(0xFFFFF2CC),
         ['الأرنب والنجمة', 'الصديق الوفي', 'رحلة إلى الغابة']),
   ];
 
