@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,7 +10,6 @@ class KidsWorldApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const seed = Color(0xFF6558D3);
-
     return MaterialApp(
       title: 'عالم الطفل - Kids World',
       debugShowCheckedModeBanner: false,
@@ -23,15 +21,6 @@ class KidsWorldApp extends StatelessWidget {
           backgroundColor: Color(0xFFF7F7FC),
           foregroundColor: Color(0xFF29264D),
           elevation: 0,
-          centerTitle: false,
-        ),
-        cardTheme: CardThemeData(
-          color: Colors.white,
-          elevation: 1,
-          shadowColor: const Color(0x1A28204D),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(22),
-          ),
         ),
       ),
       home: const Directionality(
@@ -42,7 +31,6 @@ class KidsWorldApp extends StatelessWidget {
   }
 }
 
-// بيانات الأنشطة التعليمية
 class LearningActivity {
   const LearningActivity(
     this.title,
@@ -59,7 +47,6 @@ class LearningActivity {
   final List<String> items;
 }
 
-// الشاشة الرئيسية والتنقل
 class KidsWorldShell extends StatefulWidget {
   const KidsWorldShell({super.key});
 
@@ -70,13 +57,9 @@ class KidsWorldShell extends StatefulWidget {
 class _KidsWorldShellState extends State<KidsWorldShell> {
   int selectedIndex = 0;
 
-  static const pages = [
+  static const pages = <Widget>[
     HomePage(),
-    SimplePage(
-      icon: '🌍',
-      title: 'اكتشف العالم',
-      subtitle: 'تعرف على الحيوانات والأماكن والأشياء من حولك',
-    ),
+    DiscoverPage(),
     GamesPage(),
     ParentPage(),
   ];
@@ -118,7 +101,6 @@ class _KidsWorldShellState extends State<KidsWorldShell> {
   }
 }
 
-// الأنشطة التعليمية
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
@@ -216,17 +198,12 @@ class HomePage extends StatelessWidget {
                       ),
                     );
                   },
-                  icon: const Icon(
-                    Icons.account_circle_rounded,
-                    size: 32,
-                  ),
+                  icon: const Icon(Icons.account_circle_rounded, size: 32),
                 ),
               ],
             ),
           ),
         ),
-
-        // بطاقة الترحيب
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 18),
           sliver: SliverToBoxAdapter(
@@ -234,10 +211,7 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
-                  colors: [
-                    Color(0xFF7568E8),
-                    Color(0xFF9B83E8),
-                  ],
+                  colors: [Color(0xFF7568E8), Color(0xFF9B83E8)],
                   begin: Alignment.topRight,
                   end: Alignment.bottomLeft,
                 ),
@@ -276,8 +250,6 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
-
-        // الشخصيات
         SliverPadding(
           padding: const EdgeInsets.fromLTRB(18, 18, 18, 8),
           sliver: SliverToBoxAdapter(
@@ -318,8 +290,6 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
-
-        // عنوان الأنشطة
         const SliverPadding(
           padding: EdgeInsets.fromLTRB(20, 20, 20, 12),
           sliver: SliverToBoxAdapter(
@@ -339,21 +309,16 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
-
-        // بطاقات الأنشطة
         SliverPadding(
           padding: const EdgeInsets.fromLTRB(18, 0, 18, 24),
           sliver: SliverGrid(
             delegate: SliverChildBuilderDelegate(
-              (context, index) {
-                return ActivityCard(
-                  activity: activities[index],
-                );
-              },
+              (context, index) => ActivityCard(
+                activity: activities[index],
+              ),
               childCount: activities.length,
             ),
-            gridDelegate:
-                const SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               mainAxisSpacing: 13,
               crossAxisSpacing: 13,
@@ -361,7 +326,6 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
-
         const SliverPadding(
           padding: EdgeInsets.fromLTRB(20, 0, 20, 28),
           sliver: SliverToBoxAdapter(
@@ -380,12 +344,8 @@ class HomePage extends StatelessWidget {
   }
 }
 
-// بطاقة النشاط
 class ActivityCard extends StatelessWidget {
-  const ActivityCard({
-    super.key,
-    required this.activity,
-  });
+  const ActivityCard({super.key, required this.activity});
 
   final LearningActivity activity;
 
@@ -450,21 +410,15 @@ class ActivityCard extends StatelessWidget {
   }
 }
 
-// صفحة النشاط
 class ActivityPage extends StatelessWidget {
-  const ActivityPage({
-    super.key,
-    required this.activity,
-  });
+  const ActivityPage({super.key, required this.activity});
 
   final LearningActivity activity;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(activity.title),
-      ),
+      appBar: AppBar(title: Text(activity.title)),
       body: ListView(
         padding: const EdgeInsets.all(20),
         children: [
@@ -476,10 +430,7 @@ class ActivityPage extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Text(
-                  activity.emoji,
-                  style: const TextStyle(fontSize: 55),
-                ),
+                Text(activity.emoji, style: const TextStyle(fontSize: 55)),
                 const SizedBox(height: 8),
                 Text(
                   'هيا نتعرف على ${activity.title}',
@@ -517,9 +468,7 @@ class ActivityPage extends StatelessWidget {
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text(
-                    'أحسنت! 🌟 أنت بطل عالم الطفل',
-                  ),
+                  content: Text('أحسنت! 🌟 أنت بطل عالم الطفل'),
                 ),
               );
             },
@@ -532,57 +481,47 @@ class ActivityPage extends StatelessWidget {
   }
 }
 
-// صفحة الاكتشاف
-class SimplePage extends StatelessWidget {
-  const SimplePage({
-    super.key,
-    required this.icon,
-    required this.title,
-    required this.subtitle,
-  });
-
-  final String icon;
-  final String title;
-  final String subtitle;
+class DiscoverPage extends StatelessWidget {
+  const DiscoverPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(28),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              icon,
-              style: const TextStyle(fontSize: 65),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 23,
-                fontWeight: FontWeight.w900,
-                color: Color(0xFF29264D),
+    const discoveries = [
+      ('الحيوانات', '🐼', 'تعرف على الحيوانات وأصواتها'),
+      ('الفضاء', '🚀', 'اكتشف الكواكب والنجوم'),
+      ('الطبيعة', '🌳', 'تعلم عن النباتات والبيئة'),
+      ('جسم الإنسان', '🧒', 'اكتشف جسمك بطريقة مبسطة'),
+    ];
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('اكتشف العالم 🌍')),
+      body: ListView(
+        padding: const EdgeInsets.all(18),
+        children: discoveries.map((item) {
+          return Card(
+            margin: const EdgeInsets.only(bottom: 12),
+            child: ListTile(
+              contentPadding: const EdgeInsets.all(14),
+              leading: Text(item.$2, style: const TextStyle(fontSize: 34)),
+              title: Text(
+                item.$1,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
+              subtitle: Text(item.$3),
+              trailing: const Icon(Icons.arrow_back_ios_new, size: 17),
+              onTap: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('${item.$1} ستتوفر قريباً')),
+                );
+              },
             ),
-            const SizedBox(height: 8),
-            Text(
-              subtitle,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: Color(0xFF77758E),
-                height: 1.6,
-              ),
-            ),
-          ],
-        ),
+          );
+        }).toList(),
       ),
     );
   }
 }
 
-// صفحة الألعاب
 class GamesPage extends StatelessWidget {
   const GamesPage({super.key});
 
@@ -596,9 +535,7 @@ class GamesPage extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('ألعابي 🧩'),
-      ),
+      appBar: AppBar(title: const Text('ألعابي 🧩')),
       body: ListView(
         padding: const EdgeInsets.all(18),
         children: games.map((game) {
@@ -606,23 +543,16 @@ class GamesPage extends StatelessWidget {
             margin: const EdgeInsets.only(bottom: 13),
             child: ListTile(
               contentPadding: const EdgeInsets.all(14),
-              leading: Text(
-                game.$2,
-                style: const TextStyle(fontSize: 35),
-              ),
+              leading: Text(game.$2, style: const TextStyle(fontSize: 35)),
               title: Text(
                 game.$1,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               subtitle: Text(game.$3),
               trailing: const Icon(Icons.arrow_back_ios_new),
               onTap: () {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('${game.$1} ستتوفر قريباً!'),
-                  ),
+                  SnackBar(content: Text('${game.$1} ستتوفر قريباً!')),
                 );
               },
             ),
@@ -633,24 +563,21 @@ class GamesPage extends StatelessWidget {
   }
 }
 
-// ركن ولي الأمر
 class ParentPage extends StatelessWidget {
   const ParentPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('ركن ولي الأمر 👨‍👩‍👧'),
-      ),
+      appBar: AppBar(title: const Text('ركن ولي الأمر 👨‍👩‍👧')),
       body: ListView(
         padding: const EdgeInsets.all(20),
-        children: [
-          const Center(
+        children: const [
+          Center(
             child: Text('👨‍👩‍👧‍👦', style: TextStyle(fontSize: 75)),
           ),
-          const SizedBox(height: 15),
-          const Text(
+          SizedBox(height: 15),
+          Text(
             'مرحباً بكم في ركن الأسرة',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -659,8 +586,8 @@ class ParentPage extends StatelessWidget {
               color: Color(0xFF29264D),
             ),
           ),
-          const SizedBox(height: 10),
-          const Text(
+          SizedBox(height: 10),
+          Text(
             'مساحة مخصصة لمتابعة تعلم الطفل وإدارة تجربته بأمان.',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -668,18 +595,18 @@ class ParentPage extends StatelessWidget {
               height: 1.6,
             ),
           ),
-          const SizedBox(height: 25),
-          const ParentOption(
+          SizedBox(height: 25),
+          ParentOption(
             icon: Icons.school_rounded,
             title: 'متابعة التعلم',
             subtitle: 'متابعة الأنشطة التي يتعلمها الطفل',
           ),
-          const ParentOption(
+          ParentOption(
             icon: Icons.volume_up_rounded,
             title: 'إعدادات الصوت',
             subtitle: 'إعدادات الأصوات والقراءة',
           ),
-          const ParentOption(
+          ParentOption(
             icon: Icons.security_rounded,
             title: 'أمان الطفل',
             subtitle: 'تجربة آمنة ومناسبة للأطفال',
@@ -714,4 +641,17 @@ class ParentOption extends StatelessWidget {
         ),
         title: Text(
           title,
-  
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(subtitle),
+        trailing: const Icon(Icons.arrow_back_ios_new, size: 16),
+        onTap: () {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('$title ستتوفر إعداداته قريباً')),
+          );
+        },
+      ),
+    );
+  }
+}
+
