@@ -50,8 +50,7 @@ class KidsWorldShell extends StatefulWidget {
 class _KidsWorldShellState extends State<KidsWorldShell> {
   int _selectedIndex = 0;
 
-  static const _titles = ['الرئيسية', 'اكتشف', 'ألعابي', 'ولي الأمر'];
-
+  
   @override
   Widget build(BuildContext context) {
     final pages = [
