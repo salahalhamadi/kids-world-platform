@@ -1,3 +1,4 @@
+
 name: Kids World Build
 
 on:
@@ -6,12 +7,16 @@ on:
       - main
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
   build:
+    name: Build Android and Web
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Flutter
@@ -19,10 +24,14 @@ jobs:
         with:
           channel: stable
 
-      - name: Generate Android platform files
+      - name: Generate Android and Web platform files
         run: |
           if [ ! -d android ]; then
             flutter create --platforms=android --org com.kidsworld --project-name kids_world_platform .
+          fi
+
+          if [ ! -d web ]; then
+            flutter create --platforms=web .
           fi
 
       - name: Install dependencies
@@ -40,10 +49,13 @@ jobs:
       - name: Build Web
         run: flutter build web --release
 
-      - name: Upload APK and Web
+      - name: Upload Android and Web builds
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: kids-world-builds
           path: |
             build/app/outputs/flutter-apk/app-release.apk
             build/web/
+          if-no-files-found: warn
+          
