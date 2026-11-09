@@ -19,6 +19,12 @@ jobs:
         with:
           channel: stable
 
+      - name: Generate Android platform files
+        run: |
+          if [ ! -d android ]; then
+            flutter create --platforms=android --org com.kidsworld --project-name kids_world_platform .
+          fi
+
       - name: Install dependencies
         run: flutter pub get
 
